@@ -1,0 +1,21 @@
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 14px;
+  margin-bottom: 10px;
+
+  &_icon_small {
+    height: 30px;
+  }
+  &_icon_medium {
+    height: 42px;
+  }
+
+  &_name_small {
+    height: 17px;
+  }
+  &_name_medium {
+    height: 25px;
+  }
+}

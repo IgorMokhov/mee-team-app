@@ -1,0 +1,54 @@
+@use '../../styles/variables.scss';
+@use '../../styles/mixins.scss';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.signin {
+  color: variables.$text-secondary;
+  max-width: 520px;
+
+  &_descr {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  &_form {
+    display: flex;
+    flex-direction: column;
+
+    & label {
+      margin-bottom: 8px;
+    }
+    & input {
+      @include mixins.input-styles(12px, 16px);
+      margin-bottom: 12px;
+    }
+  }
+
+  &_text {
+    text-align: center;
+    margin-bottom: 16px;
+    max-width: auto;
+  }
+
+  &_btn {
+    @include mixins.button-styles(520px);
+    margin-bottom: 8px;
+
+    & img {
+      margin-left: 8px;
+    }
+  }
+
+  &_link {
+    color: variables.$link-color;
+    border-bottom: 1px solid variables.$link-color;
+  }
+}

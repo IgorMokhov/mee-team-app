@@ -1,22 +1,43 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Logo } from '../../UI/Logo/Logo';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSignupMutation } from '../../redux/userApi';
+import { useEffect } from 'react';
+import { useAppDispatch } from '../../redux/hooks';
+import { setToken } from '../../redux/slices/auth/authSlice';
+import { ErrorResponse } from '../../types/error';
 import styles from './SignUp.module.scss';
-import { Link } from 'react-router-dom';
 
 interface SignUpForm {
   email: string;
-  phone: string;
-  password: string;
-  confirmPassword: string;
   termsAccepted: boolean;
 }
 
 export const SignUp = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const { register, handleSubmit } = useForm<SignUpForm>();
 
-  const onSubmit: SubmitHandler<SignUpForm> = (data) => {
-    console.log(data);
+  const [signup, { isSuccess, data: dataSignup, error: errorSignup }] =
+    useSignupMutation();
+
+  const onSubmit: SubmitHandler<SignUpForm> = async ({ email }) => {
+    await signup({
+      email,
+      lang: 'en',
+    }).unwrap();
   };
+
+  console.log((errorSignup as ErrorResponse)?.data.message); // we can show this error in the app
+
+  useEffect(() => {
+    if (isSuccess && dataSignup) {
+      const token = dataSignup.data.token;
+      dispatch(setToken(token));
+      navigate('/');
+    }
+  }, [isSuccess, dataSignup]);
 
   return (
     <div className={styles.wrapper}>
@@ -33,27 +54,6 @@ export const SignUp = () => {
             type="email"
             placeholder="force@adresseemail.com"
             id="email"
-          />
-          <label htmlFor="phone">Mot de passe</label>
-          <input
-            {...register('phone', { required: true })}
-            type="tel"
-            placeholder="(+237) 696 88 77 55"
-            id="phone"
-          />
-          <label htmlFor="password">Mot de passe</label>
-          <input
-            {...register('password', { required: true })}
-            type="password"
-            placeholder="********************"
-            id="password"
-          />
-          <label htmlFor="confirmPassword">Confirmer votre mot de passe</label>
-          <input
-            {...register('confirmPassword', { required: true })}
-            type="confirmPassword"
-            placeholder="********************"
-            id="confirmPassword"
           />
 
           <label htmlFor="termsAccepted">

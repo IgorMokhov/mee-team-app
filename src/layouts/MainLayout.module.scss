@@ -1,0 +1,6 @@
+@use '../styles/variables.scss';
+
+.layout {
+  background-color: variables.$bg-color-secondary;
+  min-height: 100vh;
+}

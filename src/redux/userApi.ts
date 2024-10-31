@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from './store';
+import { EmployeesResponse } from '../types/employees';
 
 export const userApi = createApi({
   reducerPath: 'userApi',
@@ -28,7 +29,14 @@ export const userApi = createApi({
         body: loginData,
       }),
     }),
+    getAllEmployees: builder.query<EmployeesResponse, number>({
+      query: (portal_id) => ({
+        url: `/administration/portal/${portal_id}/employees`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { useSignupMutation, useSigninMutation } = userApi;
+export const { useSignupMutation, useSigninMutation, useGetAllEmployeesQuery } =
+  userApi;

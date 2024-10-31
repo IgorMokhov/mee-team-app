@@ -1,0 +1,48 @@
+@use '../../styles/variables.scss';
+
+.employee {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: center;
+  list-style-type: none;
+  color: variables.$text-primary;
+  font-size: 14px;
+  padding: 32px;
+  border-bottom: 1px solid #f4f4f5;
+
+  & span:nth-child(5) {
+    height: 25px;
+    width: 56px;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 10px;
+  }
+  &_aсtive {
+    color: #213c2b;
+    background-color: #dcfce7;
+  }
+  &_dismiss {
+    color: #991b1b;
+    background-color: #fee2e2;
+  }
+
+  & button {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  &_firebtn {
+    border: 1px solid variables.$link-color;
+    background-color: #ffffff;
+    color: variables.$link-color;
+    margin-right: 4px;
+  }
+  &_rmbtn {
+    background-color: #dc2626;
+    color: #ffffff;
+    border: none;
+  }
+}

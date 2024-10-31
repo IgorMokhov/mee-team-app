@@ -1,0 +1,9 @@
+@use '../../styles/mixins.scss';
+@use '../../styles//variables.scss';
+
+.emplist {
+  background-color: variables.$bg-color-primary;
+  border-radius: 12px;
+  margin-bottom: 32px;
+  height: 550px;
+}

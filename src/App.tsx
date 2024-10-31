@@ -4,8 +4,18 @@ import { SignInPage } from './pages/SignInPage';
 import { SignUpPage } from './pages/SignUpPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { MainLayout } from './layouts/MainLayout';
+import { useEffect } from 'react';
+import { useAppDispatch } from './redux/hooks';
+import { setToken } from './redux/slices/auth/authSlice';
 
 export const App = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) dispatch(setToken(token));
+  }, []);
+
   return (
     <>
       <Routes>

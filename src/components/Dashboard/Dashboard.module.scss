@@ -1,0 +1,25 @@
+@use '../../styles/mixins.scss';
+@use '../../styles//variables.scss';
+
+.dashboard {
+  padding-top: 20px;
+
+  &_title {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  &_add_emp {
+    @include mixins.button-styles(226px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 8px;
+    margin-bottom: 16px;
+  }
+  &_add_emp::after {
+    content: '+';
+    font-size: 26px;
+  }
+}

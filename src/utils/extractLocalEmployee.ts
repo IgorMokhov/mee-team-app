@@ -7,6 +7,6 @@ export const extractLocalEmployee = (
   firstName: employee.profile.first_name,
   lastName: employee.profile.last_name,
   email: employee.profile.personal_email,
-  phone: employee.profile.mobile_phone,
+  phone: employee.profile.work_phone,
   statusDismiss: employee.status.dismiss,
 });

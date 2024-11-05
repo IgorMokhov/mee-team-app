@@ -7,7 +7,7 @@ export interface ServerEmployee {
     first_name: string | null;
     last_name: string | null;
     personal_email: string | null;
-    mobile_phone: string | null;
+    work_phone: string | null;
   };
 }
 
@@ -21,7 +21,19 @@ export interface LocalEmployee {
 }
 
 export interface EmployeesResponse {
-  data: ServerEmployee[];
+  data: ServerEmployee | ServerEmployee[];
   message: string;
   success: boolean;
+}
+
+export interface EditRequest {
+  id: number;
+  body: {
+    portal_id: number;
+    name_first: string;
+    name_last: string;
+    phone_work: string;
+    email_work: string;
+    local: string;
+  };
 }

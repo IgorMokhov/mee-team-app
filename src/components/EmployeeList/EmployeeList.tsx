@@ -17,11 +17,7 @@ export const EmployeeList = () => {
   const [selectedEmployee, setSelectedEmployee] =
     useState<null | LocalEmployee>(null);
 
-  const [editEmployee, { data: dataEdit, error: errorEdit }] =
-    useEditEmployeeMutation();
-
-  console.log('data:', dataEdit);
-  console.log('error:', errorEdit);
+  const [editEmployee, { error: errorEdit }] = useEditEmployeeMutation();
 
   const token = useAppSelector((state) => state.auth.token);
 
@@ -37,12 +33,13 @@ export const EmployeeList = () => {
   const fireEmployee = (id: number) => {};
   const removeEmployee = (id: number) => {};
 
-  if (isLoadingEmployees) {
-    return <h3>Loading...</h3>;
-  }
-  if (errorEmployees) {
+ 
+  if (isLoadingEmployees) return <h3>Loading...</h3>;
+   // The simplest error handling has been implemented, but we can handle them in any other way
+  if (errorEmployees)
     return <h3>Error: {(errorEmployees as ErrorResponse).data.message}</h3>;
-  }
+  if (errorEdit)
+    return <h3>Error: {(errorEdit as ErrorResponse).data.message}</h3>;
 
   return (
     <>

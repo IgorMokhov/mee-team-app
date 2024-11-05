@@ -6,9 +6,11 @@
   align-items: center;
   list-style-type: none;
   color: variables.$text-primary;
+  background-color: variables.$bg-color-primary;
   font-size: 14px;
   padding: 32px;
   border-bottom: 1px solid #f4f4f5;
+  cursor: pointer;
 
   & span:nth-child(5) {
     height: 25px;

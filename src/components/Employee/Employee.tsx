@@ -4,6 +4,8 @@ import styles from './Employee.module.scss';
 interface EmployeeProps extends LocalEmployee {
   fireEmployee: (id: number) => void;
   removeEmployee: (id: number) => void;
+  openModal: () => void;
+  setSelectedEmployee: (employee: LocalEmployee) => void;
 }
 
 export const Employee = ({
@@ -13,11 +15,25 @@ export const Employee = ({
   email,
   phone,
   statusDismiss,
+  setSelectedEmployee,
+  openModal,
   fireEmployee,
   removeEmployee,
 }: EmployeeProps) => {
+  const onClickEmployee = () => {
+    openModal();
+    setSelectedEmployee({
+      employeeId,
+      firstName,
+      lastName,
+      email,
+      phone,
+      statusDismiss,
+    });
+  };
+
   return (
-    <li className={styles.employee}>
+    <li className={styles.employee} onClick={onClickEmployee}>
       <span>{firstName ?? 'Empty'}</span>
       <span>{lastName ?? 'Empty'}</span>
       <span>{email ?? 'Empty'}</span>

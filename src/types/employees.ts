@@ -1,3 +1,5 @@
+export type Lang = 'en' | 'ru';
+
 export interface ServerEmployee {
   status: {
     dismiss: boolean;
@@ -36,4 +38,19 @@ export interface EditRequest {
     email_work: string;
     local: string;
   };
+}
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+  lang: Lang;
+}
+
+export interface LoginResponse {
+  data: {
+    token: string;
+    userId: number;
+  };
+  message: string;
+  success: boolean;
 }

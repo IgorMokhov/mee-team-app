@@ -45,9 +45,14 @@ export const Modal = ({
       },
     };
 
-    await editEmployee(updatedData).unwrap();
-    refetchEmployees();
-    onClose();
+    try {
+      await editEmployee(updatedData).unwrap();
+      refetchEmployees();
+      onClose();
+    } catch (error) {
+      console.log(error);
+      onClose();
+    }
   };
 
   const handleBackDropClick = (e: React.MouseEvent<HTMLDivElement>) => {

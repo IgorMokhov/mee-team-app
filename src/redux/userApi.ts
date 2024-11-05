@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from './store';
-import { EditRequest, EmployeesResponse } from '../types/employees';
+import { EditRequest, EmployeesResponse, LoginRequest, LoginResponse } from '../types/employees';
 
 export const userApi = createApi({
   reducerPath: 'userApi',
@@ -22,7 +22,7 @@ export const userApi = createApi({
         body: signupData,
       }),
     }),
-    signin: builder.mutation({
+    signin: builder.mutation<LoginResponse, LoginRequest>({
       query: (loginData) => ({
         url: '/token',
         method: 'POST',

@@ -1,0 +1,53 @@
+@use '../../styles/mixins.scss';
+
+.employee {
+  padding: 100px;
+  &_title {
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 38px;
+  }
+
+  &_formGroup {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 12px;
+    row-gap: 16px;
+
+    & label {
+      margin-bottom: 8px;
+    }
+    & input {
+      @include mixins.input-styles(12px, 16px);
+    }
+    & select {
+      @include mixins.input-styles(12px, 16px);
+      appearance: none;
+      background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"%3E%3Cpath fill="%239FA6B2" d="M7 10l5 5 5-5z"/%3E%3C/svg%3E');
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 12px;
+      cursor: pointer;
+    }
+  }
+
+  &_submit {
+    @include mixins.button-styles(200px);
+    margin-right: 10px;
+  }
+
+  &_back {
+    background-color: white;
+    border: 1px solid #d4d4d8;
+    border-radius: 10px;
+    font-size: 18px;
+    width: 200px;
+    height: 48px;
+    cursor: pointer;
+  }
+}

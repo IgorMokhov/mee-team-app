@@ -49,8 +49,9 @@ export interface LoginRequest {
 export interface LoginResponse {
   data: {
     token: string;
-    userId: number;
   };
   message: string;
   success: boolean;
 }
+
+export type SignupRequest = Omit<LoginRequest, 'password'>;

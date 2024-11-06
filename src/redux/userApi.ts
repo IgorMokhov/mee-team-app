@@ -1,6 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from './store';
-import { EditRequest, EmployeesResponse, LoginRequest, LoginResponse } from '../types/employees';
+import {
+  EditRequest,
+  EmployeesResponse,
+  LoginRequest,
+  LoginResponse,
+  SignupRequest,
+} from '../types/employees';
 
 export const userApi = createApi({
   reducerPath: 'userApi',
@@ -15,7 +21,7 @@ export const userApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    signup: builder.mutation({
+    signup: builder.mutation<LoginResponse, SignupRequest>({
       query: (signupData) => ({
         url: '/registration/email',
         method: 'POST',

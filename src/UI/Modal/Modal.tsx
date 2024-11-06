@@ -77,16 +77,16 @@ export const Modal = ({
             <label htmlFor="phone">Numéro de téléphone</label>
             <input
               {...register('phone', { required: true })}
-              type="phone"
+              type="tel"
               id="phone"
               placeholder="(+237) 696 88 77 55"
             />
           </div>
           <div className={styles.modal_formGroup}>
-            <label htmlFor="firstName">Prénom</label>
+            <label htmlFor="firstName">Nom</label>
             <input
               {...register('firstName', { required: true })}
-              type="firstName"
+              type="text"
               id="firstName"
               placeholder="Alexander"
             />
@@ -95,7 +95,7 @@ export const Modal = ({
             <label htmlFor="lastName">Prénom</label>
             <input
               {...register('lastName', { required: true })}
-              type="lastName"
+              type="text"
               id="lastName"
               placeholder="Foley"
             />

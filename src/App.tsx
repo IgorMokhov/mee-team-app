@@ -7,6 +7,7 @@ import { MainLayout } from './layouts/MainLayout';
 import { useEffect } from 'react';
 import { useAppDispatch } from './redux/hooks';
 import { setToken } from './redux/slices/auth/authSlice';
+import { NewEmployeePage } from './pages/NewEmployeePage';
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -25,6 +26,7 @@ export const App = () => {
 
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
+          <Route path="add-new-employee" element={<NewEmployeePage />} />
         </Route>
       </Routes>
     </>

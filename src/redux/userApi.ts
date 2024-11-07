@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from './store';
 import {
-  EditRequest,
+  EmployeeEditRequest,
+  EmployeeAddRequest,
   EmployeesResponse,
   LoginRequest,
   LoginResponse,
@@ -10,6 +11,7 @@ import {
 
 export const userApi = createApi({
   reducerPath: 'userApi',
+  tagTypes: ['Employees'], 
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.mee.team',
     prepareHeaders: (headers, { getState }) => {
@@ -38,15 +40,24 @@ export const userApi = createApi({
     getAllEmployees: builder.query<EmployeesResponse, number>({
       query: (portalId) => ({
         url: `/administration/portal/${portalId}/employees`,
-        method: 'GET',
       }),
+      providesTags: ['Employees'], 
     }),
-    editEmployee: builder.mutation<EmployeesResponse, EditRequest>({
+    editEmployee: builder.mutation<EmployeesResponse, EmployeeEditRequest>({
       query: ({ id, body }) => ({
         url: `/administration/portal/${body.portal_id}/employees/${id}`,
         method: 'PATCH',
         body: body,
       }),
+      invalidatesTags: ['Employees'], 
+    }),
+    addEmployee: builder.mutation<EmployeesResponse, EmployeeAddRequest>({
+      query: (employeeData) => ({
+        url: `/administration/portal/${employeeData.portal_id}/employees/invite`,
+        method: 'POST',
+        body: employeeData,
+      }),
+      invalidatesTags: ['Employees'],
     }),
   }),
 });
@@ -56,4 +67,5 @@ export const {
   useSigninMutation,
   useGetAllEmployeesQuery,
   useEditEmployeeMutation,
+  useAddEmployeeMutation,
 } = userApi;

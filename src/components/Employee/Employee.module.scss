@@ -10,7 +10,6 @@
   font-size: 14px;
   padding: 32px;
   border-bottom: 1px solid #f4f4f5;
-  cursor: pointer;
 
   & span:nth-child(5) {
     height: 25px;
@@ -35,16 +34,15 @@
     padding: 8px 12px;
     border-radius: 10px;
     cursor: pointer;
-  }
-  &_firebtn {
     border: 1px solid variables.$link-color;
-    background-color: #ffffff;
     color: variables.$link-color;
-    margin-right: 4px;
+    background-color: #ffffff;
   }
-  &_rmbtn {
-    background-color: #dc2626;
-    color: #ffffff;
-    border: none;
+
+  &_statusBtn {
+    margin-right: 5px;
+  }
+
+  &_editBtn {
   }
 }

@@ -1,9 +1,10 @@
+import { PORTAL_ID } from '../../config/constants';
+import { useChangeEmployeeStatusMutation } from '../../redux/userApi';
 import { LocalEmployee } from '../../types/employees';
+import { ErrorResponse } from '../../types/error';
 import styles from './Employee.module.scss';
 
 interface EmployeeProps extends LocalEmployee {
-  fireEmployee: (id: number) => void;
-  removeEmployee: (id: number) => void;
   openModal: () => void;
   setSelectedEmployee: (employee: LocalEmployee) => void;
 }
@@ -17,10 +18,10 @@ export const Employee = ({
   statusDismiss,
   setSelectedEmployee,
   openModal,
-  fireEmployee,
-  removeEmployee,
 }: EmployeeProps) => {
-  const onClickEmployee = () => {
+  const [changeEmployeeStatus, { error }] = useChangeEmployeeStatusMutation();
+
+  const selectEmployeeHandler = () => {
     openModal();
     setSelectedEmployee({
       employeeId,
@@ -32,8 +33,18 @@ export const Employee = ({
     });
   };
 
+  const updateStatusHandler = async () => {
+    await changeEmployeeStatus({
+      portal_id: PORTAL_ID,
+      employee_id: employeeId,
+      dismiss: !statusDismiss,
+    });
+  };
+
+  console.log((error as ErrorResponse)?.data.message); // we can show this error in the app
+
   return (
-    <li className={styles.employee} onClick={onClickEmployee}>
+    <li className={styles.employee}>
       <span>{firstName ?? 'Empty'}</span>
       <span>{lastName ?? 'Empty'}</span>
       <span>{email ?? 'Empty'}</span>
@@ -47,16 +58,16 @@ export const Employee = ({
       </span>
       <span>
         <button
-          className={styles.employee_firebtn}
-          onClick={() => fireEmployee(employeeId)}
+          className={styles.employee_statusBtn}
+          onClick={updateStatusHandler}
         >
-          Suspendre
+          {statusDismiss ? 'Suspendre' : 'Inviter'}
         </button>
         <button
-          className={styles.employee_rmbtn}
-          onClick={() => removeEmployee(employeeId)}
+          className={styles.employee_editBtn}
+          onClick={selectEmployeeHandler}
         >
-          Supprimer
+          Modifier
         </button>
       </span>
     </li>

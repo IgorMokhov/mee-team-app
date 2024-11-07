@@ -29,9 +29,6 @@ export const EmployeeList = () => {
     skip: !token,
   });
 
-  const fireEmployee = (id: number) => {};
-  const removeEmployee = (id: number) => {};
-
   if (isLoadingEmployees) return <h3>Loading...</h3>;
   // The simplest error handling has been implemented, but we can handle them in any other way
   if (errorEmployees)
@@ -47,8 +44,6 @@ export const EmployeeList = () => {
             <Employee
               key={employee.profile.employee_id}
               {...extractLocalEmployee(employee)}
-              fireEmployee={fireEmployee}
-              removeEmployee={removeEmployee}
               openModal={() => setIsModalOpen(true)}
               setSelectedEmployee={setSelectedEmployee}
             />

@@ -1,8 +1,10 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { Role } from '../../types/employees';
+import { useAddEmployeeMutation } from '../../redux/userApi';
+import { PORTAL_ID } from '../../config/constants';
+import { ErrorResponse } from '../../types/error';
 import styles from './NewEmployee.module.scss';
-
-type Role = 'administrator' | 'integrator' | 'employee';
 
 interface NewEmployeeForm {
   firstName: string;
@@ -13,11 +15,28 @@ interface NewEmployeeForm {
 
 export const NewEmployee = () => {
   const navigate = useNavigate();
+
   const { register, handleSubmit } = useForm<NewEmployeeForm>();
 
-  const onSubmit: SubmitHandler<NewEmployeeForm> = async (data) => {
-    console.log(data);
+  const [addEmployee, { error }] = useAddEmployeeMutation();
+
+  const onSubmit: SubmitHandler<NewEmployeeForm> = async ({
+    email,
+    firstName,
+    lastName,
+    type,
+  }) => {
+    await addEmployee({
+      email,
+      type,
+      portal_id: PORTAL_ID,
+      name_first: firstName,
+      name_last: lastName,
+    });
+    navigate('/');
   };
+
+  console.log((error as ErrorResponse)?.data.message); // we can show this error in the app
 
   return (
     <div className={styles.employee}>
@@ -69,6 +88,7 @@ export const NewEmployee = () => {
           <button
             className={styles.employee_back}
             onClick={() => navigate('/')}
+            type="button"
           >
             Annuler
           </button>

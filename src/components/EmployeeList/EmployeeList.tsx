@@ -25,7 +25,6 @@ export const EmployeeList = () => {
     data: employees,
     error: errorEmployees,
     isLoading: isLoadingEmployees,
-    refetch,
   } = useGetAllEmployeesQuery(PORTAL_ID, {
     skip: !token,
   });
@@ -33,9 +32,8 @@ export const EmployeeList = () => {
   const fireEmployee = (id: number) => {};
   const removeEmployee = (id: number) => {};
 
- 
   if (isLoadingEmployees) return <h3>Loading...</h3>;
-   // The simplest error handling has been implemented, but we can handle them in any other way
+  // The simplest error handling has been implemented, but we can handle them in any other way
   if (errorEmployees)
     return <h3>Error: {(errorEmployees as ErrorResponse).data.message}</h3>;
   if (errorEdit)
@@ -61,7 +59,6 @@ export const EmployeeList = () => {
           onClose={() => setIsModalOpen(false)}
           selectedEmployee={selectedEmployee!}
           editEmployee={editEmployee}
-          refetchEmployees={refetch}
         />
       )}
     </>

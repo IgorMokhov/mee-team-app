@@ -7,6 +7,7 @@ import {
   LoginRequest,
   LoginResponse,
   SignupRequest,
+  EmployeeUpdateStatus,
 } from '../types/employees';
 
 export const userApi = createApi({
@@ -41,7 +42,7 @@ export const userApi = createApi({
       query: (portalId) => ({
         url: `/administration/portal/${portalId}/employees`,
       }),
-      providesTags: ['Employees'], 
+      providesTags: ['Employees'],
     }),
     editEmployee: builder.mutation<EmployeesResponse, EmployeeEditRequest>({
       query: ({ id, body }) => ({
@@ -49,13 +50,21 @@ export const userApi = createApi({
         method: 'PATCH',
         body: body,
       }),
-      invalidatesTags: ['Employees'], 
+      invalidatesTags: ['Employees'],
     }),
     addEmployee: builder.mutation<EmployeesResponse, EmployeeAddRequest>({
       query: (employeeData) => ({
         url: `/administration/portal/${employeeData.portal_id}/employees/invite`,
         method: 'POST',
         body: employeeData,
+      }),
+      invalidatesTags: ['Employees'],
+    }),
+    changeEmployeeStatus: builder.mutation<void, EmployeeUpdateStatus>({
+      query: (updatedData) => ({
+        url: `administration/portal/${updatedData.portal_id}/employees/status/${updatedData.employee_id}`,
+        method: 'PATCH',
+        body: updatedData,
       }),
       invalidatesTags: ['Employees'],
     }),
@@ -68,4 +77,5 @@ export const {
   useGetAllEmployeesQuery,
   useEditEmployeeMutation,
   useAddEmployeeMutation,
+  useChangeEmployeeStatusMutation,
 } = userApi;

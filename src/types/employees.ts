@@ -65,3 +65,9 @@ export interface EmployeeAddRequest {
   type: Role;
   email: string;
 }
+
+export interface EmployeeUpdateStatus {
+  portal_id: number;
+  employee_id: number;
+  dismiss: boolean;
+}

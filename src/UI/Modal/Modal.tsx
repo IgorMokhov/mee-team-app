@@ -1,13 +1,12 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { EditRequest, LocalEmployee } from '../../types/employees';
+import { EmployeeEditRequest, LocalEmployee } from '../../types/employees';
 import { PORTAL_ID } from '../../config/constants';
 import styles from './Modal.module.scss';
 
 interface ModalProps {
   selectedEmployee: LocalEmployee;
   onClose: () => void;
-  editEmployee: (data: EditRequest) => any; // fix type any
-  refetchEmployees: () => void;
+  editEmployee: (data: EmployeeEditRequest) => any; // fix type any
 }
 
 interface ModalForm {
@@ -21,7 +20,6 @@ export const Modal = ({
   selectedEmployee,
   onClose,
   editEmployee,
-  refetchEmployees,
 }: ModalProps) => {
   const { register, handleSubmit } = useForm<ModalForm>({
     defaultValues: {
@@ -47,7 +45,6 @@ export const Modal = ({
 
     try {
       await editEmployee(updatedData).unwrap();
-      refetchEmployees();
       onClose();
     } catch (error) {
       console.log(error);

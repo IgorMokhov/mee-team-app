@@ -1,5 +1,9 @@
 export type Lang = 'en' | 'ru';
 
+export type Role = 'administrator' | 'integrator' | 'employee';
+
+export type SignupRequest = Omit<LoginRequest, 'password'>;
+
 export interface ServerEmployee {
   status: {
     dismiss: boolean;
@@ -28,7 +32,7 @@ export interface EmployeesResponse {
   success: boolean;
 }
 
-export interface EditRequest {
+export interface EmployeeEditRequest {
   id: number;
   body: {
     portal_id: number;
@@ -54,4 +58,10 @@ export interface LoginResponse {
   success: boolean;
 }
 
-export type SignupRequest = Omit<LoginRequest, 'password'>;
+export interface EmployeeAddRequest {
+  portal_id: number;
+  name_first: string;
+  name_last: string;
+  type: Role;
+  email: string;
+}
